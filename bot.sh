@@ -2,7 +2,7 @@
 
 SERVER=localhost
 PORT=6667
-CHAN=ed
+CHAN=3310
 NICK=ed
 
 out() {
@@ -36,7 +36,7 @@ tail -f bot.out | telnet $SERVER $PORT | tee bot.in | while read input; do
             out $(echo $input | sed 's/I/O/')
             ;;
         *PRIVMSG*)
-            body=$(echo $input | sed 's/.*PRIVMSG.*:\(.*\)/\1/')
+            body=$(echo $input | sed 's/.*PRIVMSG[^:]\+:\(.*\)/\1/')
             echo $body >ed.in
             ;;
     esac
